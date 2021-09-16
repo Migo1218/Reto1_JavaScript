@@ -1,0 +1,1 @@
+leer 10 numeros e indicar los neutros negativos y positivos

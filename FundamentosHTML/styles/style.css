@@ -1,0 +1,34 @@
+h1{
+    background-color: aqua;
+    font-size: 22px;
+}
+
+p{
+    color: blue;
+}
+
+a{
+    color: inherit;
+}
+
+.list{
+    color: purple;
+}
+
+.list-item{
+    color: initial;
+    background-color: lawngreen;
+}
+
+.text-1:hover{
+    font-size: 32px;
+    background-color: greenyellow;
+    color: honeydew;
+}
+
+.text-1::first-letter{
+    color: greenyellow;
+    font-size: 40px;
+    border: 2px solid red;
+}
+
