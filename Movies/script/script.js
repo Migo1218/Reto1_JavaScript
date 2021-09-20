@@ -1,72 +1,40 @@
-function imprimir(nombre, apellido) {
-    console.log(nombre);
-    console.log(apellido);
+const APIURL =
+    "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
+const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+
+const main = document.getElementById("main");
+const contenedor = document.getElementById("contenedor");
+const swiperContenedor = document.getElementById("swiper");
+async function obtenerPeliculas() {
+    const respuesta = await fetch(APIURL);
+    const datos = await respuesta.json();
+    const peliculas = datos.results;
+    // como peliculas es un array, puedo usar foreach
+    peliculas.forEach(function (valor, indice) {
+        const { title, poster_path, backdrop_path } = valor;
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        img.setAttribute('class', 'swiper-slide');
+        img.setAttribute('src', IMGPATH + backdrop_path);
+        swiperContenedor.appendChild(img);
+        div.setAttribute('class', 'card');
+        div.setAttribute('style', 'width: 18rem');
+        div.innerHTML = `
+        <img class="card-img-top" src="${IMGPATH + poster_path}">
+        <div class="card-body bg-dark">
+            <h5 class="card-title text-white">${title}</h5>
+        </div>
+        `
+        contenedor.appendChild(div)
+    })
 }
 
-function suma(a, b) {
-    console.log(a + b)
-    var c = a + b +10
-    console.log(c)
-}
-let moneda = ['Elige tu Moneda','Dolar','Peso Mexicano','Peso Colombiano','Euro','Libra Esterlina'];
-let divisas = ['', 'USD','MXN','COP','EUR','GBP'];
-
-let select = document.getElementById("fromCurrency");
-console.log(select);
-moneda.forEach(function monedas(valor, indice) {
-    console.log(indice)
-    let option = document.createElement('option');
-    option.setAttribute('value', divisas[indice]);
-    option.innerHTML = valor;
-    console.log(option)
-    select.appendChild(option);
-})
-select = document.getElementById("toCurrency");
-console.log(select);
-moneda.forEach(function monedas(valor, indice) {
-    option = document.createElement('option');
-    option.innerHTML = valor;
-    // console.log(option)
-    select.appendChild(option);
-})
-var danger = `
-<div class="alert alert-danger" role="alert">
-Inserte bien los datos
-</div>`
-function convertir() {
-    var amount = document.getElementById('amount')
-    var fromCurrency = document.getElementById('fromCurrency')
-    var toCurrency = document.getElementById('toCurrency')
-    fetch(`https://api.frankfurter.app/latest?amount=${amount.value}&from=${fromCurrency.value}&to=${toCurrency.value}`)
-.then(function obtenerRespuesta(response) {
-    
-    return response.json()
-})
-.then(function name(data) {
-    console.log(data)
-    var value = Object.values(data.rates)[0]
-    console.log(value)
-    alert(`${data.amount} ${data.base} = ${value} ${toCurrency.value}`)
-}).catch(function catchError(error) {
-    document.body.innerHTML = document.body.innerHTML + danger
-})
-}
-console.log('pagina cargada');
-fetch('https://api.frankfurter.app/latest?amount=20&from=GBP&to=USD')
-.then(function obtenerRespuesta(response) {
-    return response.json()
-})
-.then(function name(data) {
-    console.log(data)
-})
-var name = 'migueel'
-console.log(name)
-// console.log(Math.pow(2, 5))
-suma(10, 2)
-suma(10, 3)
-console.log('terminado')
-// imprimir(name, 'hernandez');
-// imprimir('edward', 'ramirez');
-
+obtenerPeliculas();
+var swiper = new Swiper(".mySwiper", {
+navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+},
+});
 
 
