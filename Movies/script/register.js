@@ -25,7 +25,7 @@ const almacenarRegistro = () => {
   </div>
   `;
 
-  setTimeout(() => {
+  setTimeout(function () {
     alerta.innerHTML = "";
   }, 5000);
 }

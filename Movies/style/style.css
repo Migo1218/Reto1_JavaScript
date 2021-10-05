@@ -43,3 +43,7 @@ img.swiper-slide {
   height: 600px;
   object-fit: cover;
 }
+
+.w-18 {
+  width: 18rem;
+}
